@@ -33,7 +33,7 @@ export default function Layout({ children }: LayoutProps) {
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
                 >
-                  Вакансии
+                  Vacancies
                 </Link>
                 <Link
                   to="/profiles"
@@ -43,7 +43,7 @@ export default function Layout({ children }: LayoutProps) {
                       : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
                 >
-                  Соискатели
+                  Candidates
                 </Link>
               </div>
             </div>
@@ -52,20 +52,20 @@ export default function Layout({ children }: LayoutProps) {
                 to="/vacancies/create"
                 className="px-4 py-2 text-sm font-medium text-primary-600 hover:text-primary-700 border border-primary-300 rounded-lg hover:bg-primary-50 transition-all duration-200 shadow-sm hover:shadow"
               >
-                Создать вакансию
+                Post Job
               </Link>
               <Link
                 to="/profiles/create"
                 className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-600 to-green-700 rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-sm hover:shadow-md"
               >
-                Создать профиль
+                Create Profile
               </Link>
             </div>
             <div className="md:hidden flex items-center">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-all"
-                aria-label="Меню"
+                aria-label="Menu"
               >
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   {mobileMenuOpen ? (
@@ -91,7 +91,7 @@ export default function Layout({ children }: LayoutProps) {
                     : 'text-gray-600 hover:bg-gray-50'
                 }`}
               >
-                Вакансии
+                Vacancies
               </Link>
               <Link
                 to="/profiles"
@@ -102,7 +102,7 @@ export default function Layout({ children }: LayoutProps) {
                     : 'text-gray-600 hover:bg-gray-50'
                 }`}
               >
-                Соискатели
+                Candidates
               </Link>
               <div className="pt-2 space-y-2">
                 <Link
@@ -110,14 +110,14 @@ export default function Layout({ children }: LayoutProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className="block w-full px-3 py-2 text-center text-sm font-medium text-primary-600 border border-primary-300 rounded-lg hover:bg-primary-50"
                 >
-                  Создать вакансию
+                  Post Job
                 </Link>
                 <Link
                   to="/profiles/create"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block w-full px-3 py-2 text-center text-sm font-medium text-white bg-gradient-to-r from-green-600 to-green-700 rounded-lg hover:from-green-700 hover:to-green-800"
                 >
-                  Создать профиль
+                  Create Profile
                 </Link>
               </div>
             </div>

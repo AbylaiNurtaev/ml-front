@@ -29,7 +29,7 @@ export default function VacanciesList() {
       });
       setVacancies(data);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Ошибка при загрузке вакансий');
+      setError(err.response?.data?.detail || 'Error loading vacancies');
     } finally {
       setLoading(false);
     }
@@ -43,7 +43,7 @@ export default function VacanciesList() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('ru-RU', {
+    return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -51,20 +51,20 @@ export default function VacanciesList() {
   };
 
   const formatSalary = (min?: number, max?: number) => {
-    if (!min && !max) return 'Не указана';
-    if (min && max) return `${min.toLocaleString()} - ${max.toLocaleString()} ₽`;
-    if (min) return `от ${min.toLocaleString()} ₽`;
-    if (max) return `до ${max.toLocaleString()} ₽`;
-    return 'Не указана';
+    if (!min && !max) return 'Not specified';
+    if (min && max) return `$${min.toLocaleString()} - $${max.toLocaleString()}`;
+    if (min) return `from $${min.toLocaleString()}`;
+    if (max) return `up to $${max.toLocaleString()}`;
+    return 'Not specified';
   };
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 animate-slide-up">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Вакансии</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Vacancies</h1>
           <p className="text-gray-600">
-            {vacancies.length > 0 && !loading ? `${vacancies.length} вакансий найдено` : 'Найдите подходящую вакансию'}
+            {vacancies.length > 0 && !loading ? `${vacancies.length} vacancies found` : 'Find the perfect job opportunity'}
           </p>
         </div>
         <Link
@@ -72,7 +72,7 @@ export default function VacanciesList() {
           className="btn-primary whitespace-nowrap"
         >
           <span className="mr-2">➕</span>
-          Создать вакансию
+          Post Job
         </Link>
       </div>
 
@@ -80,7 +80,7 @@ export default function VacanciesList() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="profession" className="block text-sm font-semibold text-gray-700 mb-2">
-              🔍 Фильтр по профессии
+              🔍 Filter by Profession
             </label>
             <input
               type="text"
@@ -94,7 +94,7 @@ export default function VacanciesList() {
           </div>
           <div>
             <label htmlFor="location" className="block text-sm font-semibold text-gray-700 mb-2">
-              📍 Фильтр по местоположению
+              📍 Filter by Location
             </label>
             <input
               type="text"
@@ -102,7 +102,7 @@ export default function VacanciesList() {
               name="location"
               value={filters.location}
               onChange={handleFilterChange}
-              placeholder="Москва, Санкт-Петербург..."
+              placeholder="New York, London..."
               className="input-field"
             />
           </div>
@@ -130,11 +130,11 @@ export default function VacanciesList() {
 
       {!loading && !error && vacancies.length === 0 && (
         <EmptyState
-          title="Вакансии не найдены"
-          description="Попробуйте изменить фильтры или создайте новую вакансию"
+          title="No Vacancies Found"
+          description="Try changing the filters or create a new vacancy"
           icon="📋"
           action={{
-            label: 'Создать вакансию',
+            label: 'Post Job',
             href: '/vacancies/create'
           }}
         />
@@ -156,7 +156,7 @@ export default function VacanciesList() {
                       {vacancy.employer_name}
                     </h3>
                     <span className="ml-4 px-3 py-1 bg-primary-100 text-primary-700 text-xs font-semibold rounded-full whitespace-nowrap">
-                      {Math.round(vacancy.confidence * 100)}% уверенность
+                      {Math.round(vacancy.confidence * 100)}% confidence
                     </span>
                   </div>
                   <p className="text-gray-600 mb-4 line-clamp-2 leading-relaxed">{vacancy.description}</p>

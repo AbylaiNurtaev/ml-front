@@ -38,7 +38,7 @@ export default function CreateVacancy() {
 
     try {
       if (formData.description.length < minLength) {
-        setError(`Описание должно содержать минимум ${minLength} символов`);
+        setError(`Description must contain at least ${minLength} characters`);
         setLoading(false);
         return;
       }
@@ -46,7 +46,7 @@ export default function CreateVacancy() {
       const vacancy = await createVacancy(formData);
       navigate(`/vacancies/${vacancy.id}`);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Ошибка при создании вакансии');
+      setError(err.response?.data?.detail || 'Error creating vacancy');
     } finally {
       setLoading(false);
     }
@@ -57,10 +57,10 @@ export default function CreateVacancy() {
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            Создать вакансию
+            Post a Job
           </h1>
           <p className="text-gray-600">
-            Заполните форму ниже, и наша ML-модель автоматически определит подходящую профессию
+            Fill out the form below, and our ML model will automatically determine the suitable profession
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export default function CreateVacancy() {
 
           <div>
             <label htmlFor="employer_name" className="block text-sm font-semibold text-gray-700 mb-2">
-              Название компании <span className="text-red-500">*</span>
+              Company Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -94,7 +94,7 @@ export default function CreateVacancy() {
 
           <div>
             <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
-              Описание требований <span className="text-red-500">*</span>
+              Job Requirements <span className="text-red-500">*</span>
             </label>
             <textarea
               id="description"
@@ -104,12 +104,12 @@ export default function CreateVacancy() {
               minLength={minLength}
               value={formData.description}
               onChange={handleChange}
-              placeholder="Опишите, кого вы ищете. Например: Ищем опытного разработчика Python с опытом работы с Django, PostgreSQL, Docker. Требуется знание REST API, Git, Linux..."
+              placeholder="Describe who you're looking for. For example: Looking for an experienced Python developer with Django, PostgreSQL, Docker experience. Knowledge of REST API, Git, Linux required..."
               className="input-field resize-none"
             />
             <div className="mt-2 flex items-center justify-between">
               <p className="text-sm text-gray-500">
-                ML-модель автоматически определит подходящую профессию
+                ML model will automatically determine the suitable profession
               </p>
               <span className={`text-sm font-medium ${
                 descriptionLength < minLength 
@@ -134,7 +134,7 @@ export default function CreateVacancy() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="location" className="block text-sm font-semibold text-gray-700 mb-2">
-                <span className="mr-2">📍</span>Местоположение
+                <span className="mr-2">📍</span>Location
               </label>
               <input
                 type="text"
@@ -142,14 +142,14 @@ export default function CreateVacancy() {
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                placeholder="Москва"
+                placeholder="New York, London..."
                 className="input-field"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label htmlFor="salary_min" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Зарплата от
+                  Salary From
                 </label>
                 <input
                   type="number"
@@ -157,14 +157,14 @@ export default function CreateVacancy() {
                   name="salary_min"
                   value={formData.salary_min || ''}
                   onChange={handleChange}
-                  placeholder="150000"
+                  placeholder="50000"
                   min="0"
                   className="input-field"
                 />
               </div>
               <div>
                 <label htmlFor="salary_max" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Зарплата до
+                  Salary To
                 </label>
                 <input
                   type="number"
@@ -172,7 +172,7 @@ export default function CreateVacancy() {
                   name="salary_max"
                   value={formData.salary_max || ''}
                   onChange={handleChange}
-                  placeholder="250000"
+                  placeholder="100000"
                   min="0"
                   className="input-field"
                 />
@@ -183,7 +183,7 @@ export default function CreateVacancy() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="contact_email" className="block text-sm font-semibold text-gray-700 mb-2">
-                <span className="mr-2">✉️</span>Email для связи
+                <span className="mr-2">✉️</span>Contact Email
               </label>
               <input
                 type="email"
@@ -197,7 +197,7 @@ export default function CreateVacancy() {
             </div>
             <div>
               <label htmlFor="contact_phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                <span className="mr-2">📞</span>Телефон для связи
+                <span className="mr-2">📞</span>Contact Phone
               </label>
               <input
                 type="tel"
@@ -205,7 +205,7 @@ export default function CreateVacancy() {
                 name="contact_phone"
                 value={formData.contact_phone}
                 onChange={handleChange}
-                placeholder="+7 (999) 123-45-67"
+                placeholder="+1 (555) 123-4567"
                 className="input-field"
               />
             </div>
@@ -217,7 +217,7 @@ export default function CreateVacancy() {
               onClick={() => navigate(-1)}
               className="btn-secondary order-2 sm:order-1"
             >
-              Отмена
+              Cancel
             </button>
             <button
               type="submit"
@@ -230,10 +230,10 @@ export default function CreateVacancy() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Создание...
+                  Creating...
                 </span>
               ) : (
-                'Создать вакансию'
+                'Post Job'
               )}
             </button>
           </div>

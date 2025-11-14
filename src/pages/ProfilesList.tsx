@@ -29,7 +29,7 @@ export default function ProfilesList() {
       });
       setProfiles(data);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Ошибка при загрузке профилей');
+      setError(err.response?.data?.detail || 'Error loading profiles');
     } finally {
       setLoading(false);
     }
@@ -43,7 +43,7 @@ export default function ProfilesList() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('ru-RU', {
+    return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -54,9 +54,9 @@ export default function ProfilesList() {
     <div className="px-4 sm:px-6 lg:px-8 animate-slide-up">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Соискатели</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Candidates</h1>
           <p className="text-gray-600">
-            {profiles.length > 0 && !loading ? `${profiles.length} соискателей найдено` : 'Найдите подходящего кандидата'}
+            {profiles.length > 0 && !loading ? `${profiles.length} candidates found` : 'Find the perfect candidate'}
           </p>
         </div>
         <Link
@@ -64,7 +64,7 @@ export default function ProfilesList() {
           className="px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200 whitespace-nowrap"
         >
           <span className="mr-2">➕</span>
-          Создать профиль
+          Create Profile
         </Link>
       </div>
 
@@ -72,7 +72,7 @@ export default function ProfilesList() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="profession" className="block text-sm font-semibold text-gray-700 mb-2">
-              🔍 Фильтр по профессии
+              🔍 Filter by Profession
             </label>
             <input
               type="text"
@@ -86,7 +86,7 @@ export default function ProfilesList() {
           </div>
           <div>
             <label htmlFor="location" className="block text-sm font-semibold text-gray-700 mb-2">
-              📍 Фильтр по местоположению
+              📍 Filter by Location
             </label>
             <input
               type="text"
@@ -94,7 +94,7 @@ export default function ProfilesList() {
               name="location"
               value={filters.location}
               onChange={handleFilterChange}
-              placeholder="Москва, Санкт-Петербург..."
+              placeholder="New York, London..."
               className="input-field"
             />
           </div>
@@ -122,11 +122,11 @@ export default function ProfilesList() {
 
       {!loading && !error && profiles.length === 0 && (
         <EmptyState
-          title="Профили не найдены"
-          description="Попробуйте изменить фильтры или создайте новый профиль"
+          title="No Profiles Found"
+          description="Try changing the filters or create a new profile"
           icon="👥"
           action={{
-            label: 'Создать профиль',
+            label: 'Create Profile',
             href: '/profiles/create'
           }}
         />
@@ -148,7 +148,7 @@ export default function ProfilesList() {
                       {profile.name}
                     </h3>
                     <span className="ml-4 px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full whitespace-nowrap">
-                      {Math.round(profile.confidence * 100)}% уверенность
+                      {Math.round(profile.confidence * 100)}% confidence
                     </span>
                   </div>
                   <p className="text-gray-600 mb-4 line-clamp-2 leading-relaxed">{profile.skills}</p>
@@ -170,7 +170,7 @@ export default function ProfilesList() {
                         <svg className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        {profile.expected_salary.toLocaleString()} ₽
+                        ${profile.expected_salary.toLocaleString()}
                       </span>
                     )}
                     <span className="inline-flex items-center text-gray-500">

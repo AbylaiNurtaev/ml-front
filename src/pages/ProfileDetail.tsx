@@ -27,7 +27,7 @@ export default function ProfileDetail() {
       const data = await getProfileById(id!);
       setProfile(data);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Ошибка при загрузке профиля');
+      setError(err.response?.data?.detail || 'Error loading profile');
     } finally {
       setLoading(false);
     }
@@ -40,14 +40,14 @@ export default function ProfileDetail() {
       const data = await getProfileMatches(id, 20);
       setMatches(data);
     } catch (err: any) {
-      console.error('Ошибка при загрузке совпадений:', err);
+      console.error('Error loading matches:', err);
     } finally {
       setLoadingMatches(false);
     }
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('ru-RU', {
+    return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -57,11 +57,11 @@ export default function ProfileDetail() {
   };
 
   const formatSalary = (min?: number, max?: number) => {
-    if (!min && !max) return 'Не указана';
-    if (min && max) return `${min.toLocaleString()} - ${max.toLocaleString()} ₽`;
-    if (min) return `от ${min.toLocaleString()} ₽`;
-    if (max) return `до ${max.toLocaleString()} ₽`;
-    return 'Не указана';
+    if (!min && !max) return 'Not specified';
+    if (min && max) return `$${min.toLocaleString()} - $${max.toLocaleString()}`;
+    if (min) return `from $${min.toLocaleString()}`;
+    if (max) return `up to $${max.toLocaleString()}`;
+    return 'Not specified';
   };
 
   if (loading) {
@@ -80,14 +80,14 @@ export default function ProfileDetail() {
             <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
             </svg>
-            {error || 'Профиль не найден'}
+            {error || 'Profile not found'}
           </div>
         </div>
         <Link to="/profiles" className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium">
           <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Вернуться к списку профилей
+          Back to Candidates
         </Link>
       </div>
     );
@@ -115,7 +115,7 @@ export default function ProfileDetail() {
                   💼 {profile.predicted_profession}
                 </span>
                 <span className="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium">
-                  {Math.round(profile.confidence * 100)}% уверенность
+                  {Math.round(profile.confidence * 100)}% confidence
                 </span>
                 <span className="text-sm text-gray-500">
                   📅 {formatDate(profile.created_at)}
@@ -128,7 +128,7 @@ export default function ProfileDetail() {
         <div className="mb-8">
           <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
             <span className="mr-2">💡</span>
-            Навыки и опыт
+            Skills and Experience
           </h2>
           <div className="prose max-w-none">
             <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{profile.skills}</p>
@@ -145,7 +145,7 @@ export default function ProfileDetail() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-500 mb-1">Местоположение</p>
+                <p className="text-sm font-semibold text-gray-500 mb-1">Location</p>
                 <p className="text-gray-900 font-medium">{profile.location}</p>
               </div>
             </div>
@@ -158,8 +158,8 @@ export default function ProfileDetail() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-500 mb-1">Ожидаемая зарплата</p>
-                <p className="text-gray-900 font-medium">{profile.expected_salary.toLocaleString()} ₽</p>
+                <p className="text-sm font-semibold text-gray-500 mb-1">Expected Salary</p>
+                <p className="text-gray-900 font-medium">${profile.expected_salary.toLocaleString()}</p>
               </div>
             </div>
           )}
@@ -186,7 +186,7 @@ export default function ProfileDetail() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-500 mb-1">Телефон</p>
+                <p className="text-sm font-semibold text-gray-500 mb-1">Phone</p>
                 <a href={`tel:${profile.contact_phone}`} className="text-green-600 hover:text-green-700 font-medium">
                   {profile.contact_phone}
                 </a>
@@ -200,10 +200,10 @@ export default function ProfileDetail() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Подходящие вакансии
+              Matching Vacancies
             </h2>
             <p className="text-gray-600">
-              {matches.length > 0 ? `Найдено ${matches.length} подходящих вакансий` : 'Ищем подходящие вакансии...'}
+              {matches.length > 0 ? `${matches.length} matching vacancies found` : 'Searching for matching vacancies...'}
             </p>
           </div>
         </div>
@@ -218,8 +218,8 @@ export default function ProfileDetail() {
 
         {!loadingMatches && matches.length === 0 && (
           <EmptyState
-            title="Подходящие вакансии не найдены"
-            description="Попробуйте изменить описание навыков или проверьте позже"
+            title="No Matching Vacancies Found"
+            description="Try changing your skills description or check back later"
             icon="💼"
           />
         )}

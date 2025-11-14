@@ -37,7 +37,7 @@ export default function CreateProfile() {
 
     try {
       if (formData.skills.length < minLength) {
-        setError(`Описание навыков должно содержать минимум ${minLength} символов`);
+        setError(`Skills description must contain at least ${minLength} characters`);
         setLoading(false);
         return;
       }
@@ -45,7 +45,7 @@ export default function CreateProfile() {
       const profile = await createProfile(formData);
       navigate(`/profiles/${profile.id}`);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Ошибка при создании профиля');
+      setError(err.response?.data?.detail || 'Error creating profile');
     } finally {
       setLoading(false);
     }
@@ -56,10 +56,10 @@ export default function CreateProfile() {
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            Создать профиль соискателя
+            Create Candidate Profile
           </h1>
           <p className="text-gray-600">
-            Заполните форму ниже, и наша ML-модель автоматически определит подходящую профессию
+            Fill out the form below, and our ML model will automatically determine the suitable profession
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export default function CreateProfile() {
 
           <div>
             <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
-              Имя <span className="text-red-500">*</span>
+              Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -86,14 +86,14 @@ export default function CreateProfile() {
               required
               value={formData.name}
               onChange={handleChange}
-              placeholder="Иван Иванов"
+              placeholder="John Doe"
               className="input-field"
             />
           </div>
 
           <div>
             <label htmlFor="skills" className="block text-sm font-semibold text-gray-700 mb-2">
-              Навыки и опыт <span className="text-red-500">*</span>
+              Skills and Experience <span className="text-red-500">*</span>
             </label>
             <textarea
               id="skills"
@@ -103,12 +103,12 @@ export default function CreateProfile() {
               minLength={minLength}
               value={formData.skills}
               onChange={handleChange}
-              placeholder="Опишите свои навыки и опыт. Например: Опыт работы с Python 5 лет, Django, PostgreSQL, Docker, REST API, Git. Разрабатывал микросервисы, работал с CI/CD..."
+              placeholder="Describe your skills and experience. For example: 5 years of Python experience, Django, PostgreSQL, Docker, REST API, Git. Developed microservices, worked with CI/CD..."
               className="input-field resize-none"
             />
             <div className="mt-2 flex items-center justify-between">
               <p className="text-sm text-gray-500">
-                ML-модель автоматически определит подходящую профессию
+                ML model will automatically determine the suitable profession
               </p>
               <span className={`text-sm font-medium ${
                 skillsLength < minLength 
@@ -133,7 +133,7 @@ export default function CreateProfile() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="location" className="block text-sm font-semibold text-gray-700 mb-2">
-                <span className="mr-2">📍</span>Местоположение
+                <span className="mr-2">📍</span>Location
               </label>
               <input
                 type="text"
@@ -141,13 +141,13 @@ export default function CreateProfile() {
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                placeholder="Москва"
+                placeholder="New York, London..."
                 className="input-field"
               />
             </div>
             <div>
               <label htmlFor="expected_salary" className="block text-sm font-semibold text-gray-700 mb-2">
-                <span className="mr-2">💰</span>Ожидаемая зарплата
+                <span className="mr-2">💰</span>Expected Salary
               </label>
               <input
                 type="number"
@@ -155,7 +155,7 @@ export default function CreateProfile() {
                 name="expected_salary"
                 value={formData.expected_salary || ''}
                 onChange={handleChange}
-                placeholder="200000"
+                placeholder="80000"
                 min="0"
                 className="input-field"
               />
@@ -165,7 +165,7 @@ export default function CreateProfile() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="contact_email" className="block text-sm font-semibold text-gray-700 mb-2">
-                <span className="mr-2">✉️</span>Email для связи
+                <span className="mr-2">✉️</span>Contact Email
               </label>
               <input
                 type="email"
@@ -173,13 +173,13 @@ export default function CreateProfile() {
                 name="contact_email"
                 value={formData.contact_email}
                 onChange={handleChange}
-                placeholder="ivan@example.com"
+                placeholder="john@example.com"
                 className="input-field"
               />
             </div>
             <div>
               <label htmlFor="contact_phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                <span className="mr-2">📞</span>Телефон для связи
+                <span className="mr-2">📞</span>Contact Phone
               </label>
               <input
                 type="tel"
@@ -187,7 +187,7 @@ export default function CreateProfile() {
                 name="contact_phone"
                 value={formData.contact_phone}
                 onChange={handleChange}
-                placeholder="+7 (999) 765-43-21"
+                placeholder="+1 (555) 123-4567"
                 className="input-field"
               />
             </div>
@@ -199,7 +199,7 @@ export default function CreateProfile() {
               onClick={() => navigate(-1)}
               className="btn-secondary order-2 sm:order-1"
             >
-              Отмена
+              Cancel
             </button>
             <button
               type="submit"
@@ -212,10 +212,10 @@ export default function CreateProfile() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Создание...
+                  Creating...
                 </span>
               ) : (
-                'Создать профиль'
+                'Create Profile'
               )}
             </button>
           </div>

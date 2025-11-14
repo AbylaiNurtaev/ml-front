@@ -10,11 +10,11 @@ export default function Home() {
         <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
           <span className="block">Job Matching</span>
           <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-primary-800">
-            Умный поиск работы
+            Smart Job Search
           </span>
         </h1>
         <p className="mt-6 max-w-3xl mx-auto text-lg text-gray-600 sm:text-xl md:text-2xl">
-          Платформа для поиска работы и сотрудников с использованием машинного обучения
+          Platform for finding jobs and talent using machine learning
         </p>
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
           <Link
@@ -22,14 +22,14 @@ export default function Home() {
             className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
           >
             <span className="mr-2">💼</span>
-            Создать вакансию
+            Post a Job
           </Link>
           <Link
             to="/profiles/create"
             className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
           >
             <span className="mr-2">👤</span>
-            Создать профиль
+            Create Profile
           </Link>
         </div>
       </div>
@@ -54,16 +54,16 @@ export default function Home() {
             </div>
             <div className="ml-6 flex-1">
               <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Для работодателей
+                For Employers
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Опишите, кого вы ищете, и наша ML-модель автоматически найдет подходящих кандидатов с высокой точностью
+                Describe who you're looking for, and our ML model will automatically find suitable candidates with high accuracy
               </p>
               <Link
                 to="/vacancies/create"
                 className="inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold group"
               >
-                Создать вакансию
+                Post a Job
                 <svg className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
@@ -91,16 +91,16 @@ export default function Home() {
             </div>
             <div className="ml-6 flex-1">
               <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Для соискателей
+                For Job Seekers
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Опишите свои навыки, и мы автоматически подберем подходящие вакансии, соответствующие вашему профилю
+                Describe your skills, and we'll automatically match you with suitable job opportunities that fit your profile
               </p>
               <Link
                 to="/profiles/create"
                 className="inline-flex items-center text-green-600 hover:text-green-700 font-semibold group"
               >
-                Создать профиль
+                Create Profile
                 <svg className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
@@ -118,10 +118,10 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
-                Просмотр вакансий
+                Browse Vacancies
               </h3>
               <p className="text-sm text-gray-600">
-                Изучите все доступные вакансии с фильтрацией по профессии и местоположению
+                Explore all available job openings with filtering by profession and location
               </p>
             </div>
             <svg className="h-6 w-6 text-gray-400 group-hover:text-primary-600 transform group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,10 +137,10 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
-                Просмотр соискателей
+                Browse Candidates
               </h3>
               <p className="text-sm text-gray-600">
-                Найдите подходящих кандидатов среди всех зарегистрированных соискателей
+                Find suitable candidates among all registered job seekers
               </p>
             </div>
             <svg className="h-6 w-6 text-gray-400 group-hover:text-green-600 transform group-hover:translate-x-1 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -152,23 +152,23 @@ export default function Home() {
 
       <div className="mt-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl p-8 md:p-12 text-center text-white shadow-xl">
         <h2 className="text-2xl md:text-3xl font-bold mb-4">
-          Начните поиск уже сегодня
+          Start Your Search Today
         </h2>
         <p className="text-primary-100 text-lg mb-6 max-w-2xl mx-auto">
-          Используйте силу машинного обучения для идеального подбора кандидатов и вакансий
+          Harness the power of machine learning for perfect candidate and job matching
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             to="/vacancies"
             className="px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
-            Найти вакансии
+            Find Jobs
           </Link>
           <Link
             to="/profiles"
             className="px-6 py-3 bg-white/10 text-white border-2 border-white rounded-lg font-semibold hover:bg-white/20 transition-all"
           >
-            Найти кандидатов
+            Find Talent
           </Link>
         </div>
       </div>

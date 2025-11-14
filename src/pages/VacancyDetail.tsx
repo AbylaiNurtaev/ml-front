@@ -27,7 +27,7 @@ export default function VacancyDetail() {
       const data = await getVacancyById(id!);
       setVacancy(data);
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Ошибка при загрузке вакансии');
+      setError(err.response?.data?.detail || 'Error loading vacancy');
     } finally {
       setLoading(false);
     }
@@ -40,14 +40,14 @@ export default function VacancyDetail() {
       const data = await getVacancyMatches(id, 20);
       setMatches(data);
     } catch (err: any) {
-      console.error('Ошибка при загрузке совпадений:', err);
+      console.error('Error loading matches:', err);
     } finally {
       setLoadingMatches(false);
     }
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('ru-RU', {
+    return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -57,11 +57,11 @@ export default function VacancyDetail() {
   };
 
   const formatSalary = (min?: number, max?: number) => {
-    if (!min && !max) return 'Не указана';
-    if (min && max) return `${min.toLocaleString()} - ${max.toLocaleString()} ₽`;
-    if (min) return `от ${min.toLocaleString()} ₽`;
-    if (max) return `до ${max.toLocaleString()} ₽`;
-    return 'Не указана';
+    if (!min && !max) return 'Not specified';
+    if (min && max) return `$${min.toLocaleString()} - $${max.toLocaleString()}`;
+    if (min) return `from $${min.toLocaleString()}`;
+    if (max) return `up to $${max.toLocaleString()}`;
+    return 'Not specified';
   };
 
   if (loading) {
@@ -80,14 +80,14 @@ export default function VacancyDetail() {
             <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
             </svg>
-            {error || 'Вакансия не найдена'}
+            {error || 'Vacancy not found'}
           </div>
         </div>
         <Link to="/vacancies" className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium">
           <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Вернуться к списку вакансий
+          Back to Vacancies
         </Link>
       </div>
     );
@@ -115,7 +115,7 @@ export default function VacancyDetail() {
                   💼 {vacancy.predicted_profession}
                 </span>
                 <span className="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium">
-                  {Math.round(vacancy.confidence * 100)}% уверенность
+                  {Math.round(vacancy.confidence * 100)}% confidence
                 </span>
                 <span className="text-sm text-gray-500">
                   📅 {formatDate(vacancy.created_at)}
@@ -128,7 +128,7 @@ export default function VacancyDetail() {
         <div className="mb-8">
           <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
             <span className="mr-2">📝</span>
-            Описание требований
+            Job Requirements
           </h2>
           <div className="prose max-w-none">
             <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{vacancy.description}</p>
@@ -145,7 +145,7 @@ export default function VacancyDetail() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-500 mb-1">Местоположение</p>
+                <p className="text-sm font-semibold text-gray-500 mb-1">Location</p>
                 <p className="text-gray-900 font-medium">{vacancy.location}</p>
               </div>
             </div>
@@ -157,7 +157,7 @@ export default function VacancyDetail() {
               </svg>
             </div>
             <div>
-              <p className="text-sm font-semibold text-gray-500 mb-1">Зарплата</p>
+              <p className="text-sm font-semibold text-gray-500 mb-1">Salary</p>
               <p className="text-gray-900 font-medium">{formatSalary(vacancy.salary_min, vacancy.salary_max)}</p>
             </div>
           </div>
@@ -184,7 +184,7 @@ export default function VacancyDetail() {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-500 mb-1">Телефон</p>
+                <p className="text-sm font-semibold text-gray-500 mb-1">Phone</p>
                 <a href={`tel:${vacancy.contact_phone}`} className="text-primary-600 hover:text-primary-700 font-medium">
                   {vacancy.contact_phone}
                 </a>
@@ -198,10 +198,10 @@ export default function VacancyDetail() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Подходящие соискатели
+              Matching Candidates
             </h2>
             <p className="text-gray-600">
-              {matches.length > 0 ? `Найдено ${matches.length} подходящих кандидатов` : 'Ищем подходящих кандидатов...'}
+              {matches.length > 0 ? `${matches.length} matching candidates found` : 'Searching for matching candidates...'}
             </p>
           </div>
         </div>
@@ -216,8 +216,8 @@ export default function VacancyDetail() {
 
         {!loadingMatches && matches.length === 0 && (
           <EmptyState
-            title="Подходящие соискатели не найдены"
-            description="Попробуйте изменить описание вакансии или проверьте позже"
+            title="No Matching Candidates Found"
+            description="Try changing the job description or check back later"
             icon="👤"
           />
         )}
@@ -253,7 +253,7 @@ export default function VacancyDetail() {
                       )}
                       {profile.expected_salary && (
                         <span className="inline-flex items-center text-gray-600">
-                          💰 {profile.expected_salary.toLocaleString()} ₽
+                          💰 ${profile.expected_salary.toLocaleString()}
                         </span>
                       )}
                     </div>
